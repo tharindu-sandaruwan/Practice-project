@@ -21,7 +21,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Optional<Employee> employee = employeeRepository.findByNic(employeeRequestDTO.getNic());
         if (employee.isPresent()) {
-            System.out.println("Employee already exists");
+            System.out.println("Employee already exists"+employeeRequestDTO.getNic());
+
         }else {
             Employee emp = new Employee();
             emp.setName(employeeRequestDTO.getName());
