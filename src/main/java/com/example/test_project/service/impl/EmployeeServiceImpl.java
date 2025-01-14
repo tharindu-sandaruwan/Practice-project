@@ -1,6 +1,7 @@
 package com.example.test_project.service.impl;
 
 import com.example.test_project.controller.DTO.EmployeeRequestDTO;
+import com.example.test_project.exception.EmployeeNotFoundException;
 import com.example.test_project.model.Employee;
 import com.example.test_project.repository.EmployeeRepository;
 import com.example.test_project.service.EmployeeService;
@@ -17,11 +18,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
-    public void saveEmployee(EmployeeRequestDTO employeeRequestDTO) {
+    public void saveEmployee(EmployeeRequestDTO employeeRequestDTO)throws EmployeeNotFoundException {
 
         Optional<Employee> employee = employeeRepository.findByNic(employeeRequestDTO.getNic());
         if (employee.isPresent()) {
-            System.out.println("Employee already exists"+employeeRequestDTO.getNic());
+            throw new EmployeeNotFoundException("Employee with nic " + employeeRequestDTO.getNic() + " already exists");
 
         }else {
             Employee emp = new Employee();
