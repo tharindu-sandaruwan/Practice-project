@@ -1,6 +1,7 @@
 package com.example.test_project.controller;
 
 import com.example.test_project.controller.DTO.EmployeeRequestDTO;
+import com.example.test_project.exception.EmployeeNotFoundException;
 import com.example.test_project.model.Employee;
 import com.example.test_project.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ public class MainController {
     private EmployeeService employeeService;
 
     @PostMapping(value = "/employees")
-    public void save(@RequestBody EmployeeRequestDTO employeeRequestDTO) {
+    public void save(@RequestBody EmployeeRequestDTO employeeRequestDTO) throws EmployeeNotFoundException {
         employeeService.saveEmployee(employeeRequestDTO);
     }
 
